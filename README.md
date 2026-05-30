@@ -4,7 +4,7 @@
 This repository contains the source code, simulation environments,
 trained models, and experimental artifacts used in the paper:
 
-"Your Paper Title"
+"­­Comparative Analysis of Proximal Policy Optimization and Deep Q-Network for Autonomous Mobile Robot Navigation "
 
 ## Repository Structure
 
@@ -21,7 +21,3 @@ docs/            - Experiment documentation
 - ROS2 Humble
 - Gazebo Harmonic
 - Python 3.10+
-
-## Usage
-
-...
