@@ -26,5 +26,4 @@ Batch Size: 64
 
 ## Training
 
-Total Timesteps: XXXXX
-Random Seed: XX
+Total Timesteps: 130000 
