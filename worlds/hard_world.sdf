@@ -1,0 +1,188 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="maze_world">
+   <plugin
+  filename="gz-sim-world-control-system"
+  name="gz::sim::systems::WorldControl">
+</plugin>
+   <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <!-- LIGHT -->
+    <light name="sun" type="directional">
+      <pose>0 0 20 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <direction>0 0 -1</direction>
+    </light>
+
+    <!-- GROUND -->
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>20 20</size></plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>20 20</size></plane>
+          </geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse> 
+         </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ================= MAZE ================= -->
+    <model name="maze">
+      <static>true</static>
+
+      <!-- ROTATE -->
+      <pose>0 0 0 0 0 -1.57</pose>
+
+      <!-- ================= BOUNDARY (SEGMENTED) ================= -->
+
+      <!-- bottom -->
+      <model name="b1">
+      <static>true</static>
+<pose>0 -4.8 0.1 0 0 0</pose><link name="l"><collision name="c"><geometry><box>
+<size>3 0.2 1</size></box>
+</geometry></collision><visual name="v"><geometry>
+<box><size>2 0.2 1</size></box>
+</geometry><material><ambient>1 1 0 1</ambient></material></visual></link></model>
+
+      <!-- bottom left -->
+      <model name="b2">
+      <static>true</static>
+<pose>-2 -4 0.1 0 0 -0.7</pose>
+<link name="l"><collision name="c"><geometry>
+<box><size>2 0.2 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>2 0.2 1</size></box></geometry><material><ambient>1 1 0 1</ambient></material></visual></link></model>
+
+      <!-- bottom right -->
+      <model name="b3">
+      <static>true</static>
+<pose>2 -4 0.1 0 0 0.7</pose>
+<link name="l"><collision name="c"><geometry>
+<box><size>2 0.2 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>2 0.2 1</size></box></geometry>
+<material><ambient>1 1 0 1</ambient></material></visual></link></model>
+
+      <!-- left vertical -->
+      <model name="b4">
+      <static>true</static>
+<pose>-3 0 0.1 0 0 1.57</pose>
+<link name="l"><collision name="c">
+<geometry><box><size>7 0.2 1</size></box></geometry>
+</collision>
+<visual name="v"><geometry><box><size>7 0.2 1</size></box></geometry>
+<material><ambient>1 1 0 1</ambient></material></visual></link></model>
+
+      <!-- right vertical -->
+      <model name="b5">
+      <static>true</static>
+<pose>3 0 0.1 0 0 1.57</pose><link name="l">
+<collision name="c"><geometry><box><size>7 0.2 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>7 0.2 1</size></box></geometry><material><ambient>1 1 0 1</ambient></material></visual></link></model>
+
+      <!-- top -->
+       <model name="b7">
+       <static>true</static>
+<pose>-2.5 3 0.1 0 0 0.7</pose><link name="l"><collision name="c"><geometry><box>
+<size>2 0.2 1</size>
+</box></geometry></collision><visual name="v"><geometry><box><size>2 0.2 1</size></box></geometry><material>
+<ambient>1 1 0 1</ambient></material></visual></link></model>
+	<model name="b8">
+	<static>true</static>
+<pose>2.5 3 0.1 0 0 -0.7</pose><link name="l">
+<collision name="c"><geometry><box>
+<size>2 0.2 1</size></box></geometry></collision><visual name="v"><geometry><box>
+<size>2 0.2 1</size></box></geometry><material><ambient>1 1 0 1</ambient></material></visual></link></model>
+      <!-- ================= ENTRY ================= -->
+
+      <model name="entry_left">
+       <static>true</static>
+        <pose>-1 -4.3 0.5 0 0 0</pose>
+        <link name="l">
+          <collision name="c"><geometry><box><size>0.4 1 1</size></box></geometry></collision>
+          <visual name="v"><geometry><box><size>0.4 1 1</size></box></geometry><material><ambient>1 1 1 1</ambient></material></visual>
+        </link>
+      </model>
+
+      <model name="entry_right">
+      <static>true</static>
+        <pose>1 -4.3 0.5 0 0 0</pose>
+        <link name="l">
+          <collision name="c"><geometry><box><size>0.4 1 1</size></box></geometry></collision>
+          <visual name="v"><geometry><box><size>0.4 1 1</size></box></geometry><material><ambient>1 1 1 1</ambient></material></visual>
+        </link>
+      </model>
+
+      <!-- ================= INNER WALLS ================= -->
+
+
+      <model name="w2"><static>true</static><pose>-1 -0.5 0.5 0 0 0</pose>
+<link name="l">
+<collision name="c"><geometry><box>
+<size>2 0.5 1</size></box></geometry></collision>
+<visual name="v"><geometry><box>
+<size>2 0.5 1</size></box></geometry><material><ambient>1 1 1 1</ambient></material></visual></link></model>
+     <model name="w1"><static>true</static><pose>1.6 -1.7 0.1 0 0 0.9</pose><link name="l">
+<collision name="c"><geometry><box>
+<size>2 0.5 1</size></box></geometry></collision>
+<visual name="v"><geometry><box>
+<size>2 0.5 1</size></box></geometry><material><ambient>1 1 0 1</ambient></material></visual></link></model>
+      <model name="w3"><static>true</static><pose>1.5 2 0.5 0 0 -0.6</pose>
+<link name="l"><collision name="c"><geometry>
+<box><size>2 0.5 1</size></box>
+</geometry>
+</collision>
+<visual name="v"><geometry><box>
+<size>2 0.5 1</size></box></geometry><material><ambient>1 1 1 1</ambient></material></visual></link></model>
+
+      <model name="w4"><static>true</static><pose>-1.8 2 0.5 0 0 0.6</pose>
+<link name="l"><collision name="c">
+<geometry><box><size>2 0.5 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>2 0.5 1</size></box></geometry><material><ambient>1 1 1 1</ambient></material></visual></link></model>
+
+    </model>
+         <model name="o1"><static>true</static><pose>-2 2 0.1 0 0 0</pose><link name="l">
+<collision name="c"><geometry><box><size>0.1 0.1 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>0.1 0.1 1</size></box></geometry>
+<material><ambient>1 0 0 1</ambient>
+<diffuse>1 0 0 1</diffuse></material>
+</visual></link></model>
+<model name="o2"><static>true</static><pose>-0.8 -1.5 0.1 0 0 0</pose><link name="l">
+<collision name="c"><geometry><box><size>0.1 0.1 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>0.1 0.1 1</size></box></geometry>
+<material><ambient>1 0 0 1</ambient>
+<diffuse>1 0 0 1</diffuse></material>
+</visual></link></model>
+<model name="o3"><static>true</static><pose>5.0 0.0 0.1 0 0 0</pose><link name="l">
+<collision name="c"><geometry><box><size>0.1 0.1 1</size></box></geometry></collision>
+<visual name="v"><geometry><box><size>0.1 0.1 1</size></box></geometry>
+<material><ambient>1 0 0 1</ambient>
+<diffuse>1 0 0 1</diffuse></material>
+</visual></link></model>
+  </world>
+</sdf>
