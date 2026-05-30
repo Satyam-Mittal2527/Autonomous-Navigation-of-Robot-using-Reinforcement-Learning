@@ -18,12 +18,6 @@
 - room.sdf
 - simple_world.sdf
 
-## PPO Parameters
-
-Learning Rate: 0.0003
-Gamma: 0.99
-Batch Size: 64
-
 ## Training
 
 Total Timesteps: 130000 
